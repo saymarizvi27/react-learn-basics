@@ -1,10 +1,60 @@
-import React, { Component } from 'react';
+import React, { Component ,useState } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
 
-class App extends Component {
-  state = {
-    persons: [
+//Class Based 
+// class App extends Component {
+//   state = {
+//     persons: [
+//       {
+//         name: 'Max', age: 20
+//       },
+//       {
+//         name: 'Sayma', age: 18
+//       },
+//       {
+//         name: 'Harsh', age: 26
+//       }
+//     ]
+//   }
+  
+//   //Do not use this,switchNameHandler() 
+//   //because it will execute immediately as soon as the dom is rendered
+//   switchNameHandler = () => {
+//       //to update the state in class based 
+//       this.setState({
+//         persons:[
+//         {
+//           name: 'Maxo', age: 20
+//         },
+//         {
+//           name: 'Saymi', age: 18
+//         },
+//         {
+//           name: 'Harsh', age: 26
+//         }
+//       ]})
+//   }
+
+//   render() {
+//     return (
+//       <div className="App">
+//         <h1>Hello World</h1>
+//         <button onClick={this.switchNameHandler}>Switch Names</button>
+//         <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+//         <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My Hobbies:Racing</Person>
+//         <Person name={this.state.persons[2].name} age={this.state.persons[2].name} />
+//       </div>
+
+//     );
+//   }
+// }
+
+// export default App;
+
+const app = (props) =>{
+  const [ personState, setPersonsState] = useState({
+      persons: [
       {
         name: 'Max', age: 20
       },
@@ -14,14 +64,15 @@ class App extends Component {
       {
         name: 'Harsh', age: 26
       }
-    ]
-  }
-  
-  //Do not use this,switchNameHandler() 
-  //because it will execute immediately as soon as the dom is rendered
-  switchNameHandler = () => {
-      //to update the state in class based 
-      this.setState({
+    ],
+    otherState:'some other value'
+
+  })
+
+  const switchNameHandler = () => {
+      //to update the state in class based
+      //otherState gets removed when we update setPersonState 
+      setPersonsState({
         persons:[
         {
           name: 'Maxo', age: 20
@@ -34,19 +85,17 @@ class App extends Component {
         }
       ]})
   }
+  return (
+          <div className="App">
+            <h1>Hello World</h1>
+            <button onClick={switchNameHandler}>Switch Names</button>
+            <Person name={personState.persons[0].name} age={personState.persons[0].age} />
+            <Person name={personState.persons[1].name} age={personState.persons[1].age}>My Hobbies:Racing</Person>
+            <Person name={personState.persons[2].name} age={personState.persons[2].age} />
+          </div>
+        );
 
-  render() {
-    return (
-      <div className="App">
-        <h1>Hello World</h1>
-        <button onClick={this.switchNameHandler}>Switch Names</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>My Hobbies:Racing</Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].name} />
-      </div>
-
-    );
-  }
 }
 
-export default App;
+
+export default app;
