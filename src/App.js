@@ -53,12 +53,20 @@ class App extends Component {
 }
 
   render() {
+    //Inline Styles
+    const style ={
+      backgroundColor: 'white',
+      font:'inherit',
+      border: '1px solid blue',
+      padding:'8px',
+      cursor: 'pointer'
+    }
     return (
       <div className="App">
         <h1>Hello World</h1>
         {/*Second method is inefficient should avoid usind it*/}
         {/* <button onClick={this.switchNameHandler.bind(this,'harry')}>Switch Names</button> */}
-        <button onClick={(()=>this.switchNameHandler('harry!!!!'))}>Switch Names</button> 
+        <button style={style} onClick={(()=>this.switchNameHandler('harry!!!!'))}>Switch Names</button> 
         <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
         <Person name={this.state.persons[1].name} age={this.state.persons[1].age}
          switchNameHandler={this.switchNameHandler.bind(this,'Megan')}
