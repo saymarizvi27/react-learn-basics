@@ -20,7 +20,19 @@ class App extends Component {
   //Do not use this,switchNameHandler() 
   //because it will execute immediately as soon as the dom is rendered
   switchNameHandler = () => {
-      console.log("Inside switch Name Handler");
+      //to update the state in class based 
+      this.setState({
+        persons:[
+        {
+          name: 'Maxo', age: 20
+        },
+        {
+          name: 'Saymi', age: 18
+        },
+        {
+          name: 'Harsh', age: 26
+        }
+      ]})
   }
 
   render() {
