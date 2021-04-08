@@ -56,6 +56,13 @@ class App extends Component {
     })
   }
 
+  deletePersonHandler = (personIndex) => {
+    console.log("heyyyy",personIndex)
+    const person = this.state.persons;
+    person.splice(personIndex, 1);
+    this.setState({ persons: person })
+  }
+
   togglePersonHandler = () => {
     this.setState({ showPersons: !(this.state.showPersons) });
   }
@@ -72,12 +79,15 @@ class App extends Component {
 
     let person = null;
     //Better way and cleaner way and preferred way
+    //Using map and make a cleaner code
     if (this.state.showPersons) {
       person =
         (
           <div>
-            {this.state.persons.map(person=>{
-               return (<Person name={person.name} age={person.age} />)
+            {this.state.persons.map((person, index) => {
+              return (<Person name={person.name}
+                age={person.age}
+                onClick={() => { this.deletePersonHandler(index) }} />)
             })}
             {/* <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
             <Person name={this.state.persons[1].name} age={this.state.persons[1].age}
@@ -94,7 +104,7 @@ class App extends Component {
         {/*Second method is inefficient should avoid usind it*/}
         {/* <button onClick={this.switchNameHandler.bind(this,'harry')}>Switch Names</button> */}
         {/* <button style={style} onClick={(() => this.switchNameHandler('harry!!!!'))}>Switch Names</button> */}
-        <button onClick={this.togglePersonHandler}>Switch Names</button>
+        <button style={style} onClick={this.togglePersonHandler}>Switch Names</button>
         {person}
       </div>
 
