@@ -57,8 +57,10 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    console.log("heyyyy",personIndex)
-    const person = this.state.persons;
+    // const person = this.state.persons;
+    //Better practice as it creates a copy it is better approach
+     
+    const persons =[...this.state.persons]
     person.splice(personIndex, 1);
     this.setState({ persons: person })
   }
