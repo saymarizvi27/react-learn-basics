@@ -8,13 +8,13 @@ class App extends Component {
   state = {
     persons: [
       {
-        name: 'Max', age: 20 , id: 1 
+        name: 'Max', age: 20, id: 1
       },
       {
-        name: 'Sayma', age: 18 ,id: 2
+        name: 'Sayma', age: 18, id: 2
       },
       {
-        name: 'Harsh', age: 26 ,id: 3
+        name: 'Harsh', age: 26, id: 3
       }
     ],
     showPersons: false
@@ -60,7 +60,7 @@ class App extends Component {
     // const person = this.state.persons;
     //Better practice as it creates a copy it is better approach
 
-    const person =[...this.state.persons]
+    const person = [...this.state.persons]
     person.splice(personIndex, 1);
     this.setState({ persons: person })
   }
@@ -82,6 +82,10 @@ class App extends Component {
     let person = null;
     //Better way and cleaner way and preferred way
     //Using map and make a cleaner code
+    //Keys help React identify which items have changed (added/removed/re-ordered). To give a unique identity to every element inside the array, a key is required.
+
+    // read this article for interview purpose 
+    // https://adhithiravi.medium.com/why-do-i-need-keys-in-react-lists-dbb522188bbb#:~:text=Keys%20help%20React%20identify%20which,array%2C%20a%20key%20is%20required.&text=Each%20item%20in%20the%20array,a%20key%20for%20each%20item.
     if (this.state.showPersons) {
       person =
         (
@@ -89,8 +93,8 @@ class App extends Component {
             {this.state.persons.map((person, index) => {
               return (<Person name={person.name}
                 age={person.age}
-                onClick={() => { this.deletePersonHandler(index)}}
-                key ={person.id} />)
+                onClick={() => { this.deletePersonHandler(index) }}
+                key={person.id} />)
             })}
             {/* <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
             <Person name={this.state.persons[1].name} age={this.state.persons[1].age}
