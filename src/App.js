@@ -1,4 +1,4 @@
-import React, { Component ,useState } from 'react';
+import React, { Component, useState } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
 
@@ -15,15 +15,16 @@ class App extends Component {
       {
         name: 'Harsh', age: 26
       }
-    ]
+    ],
+    showPersons: false 
   }
-  
+
   //Do not use this,switchNameHandler() 
   //because it will execute immediately as soon as the dom is rendered
   switchNameHandler = (nameGiven) => {
-      //to update the state in class based 
-      this.setState({
-        persons:[
+    //to update the state in class based 
+    this.setState({
+      persons: [
         {
           name: nameGiven, age: 20
         },
@@ -33,32 +34,38 @@ class App extends Component {
         {
           name: 'Harsh', age: 26
         }
-      ]})
+      ]
+    })
   }
 
   nameChangeHandler = (event) => {
     console.log("nameChangeHandler");
     this.setState({
-      persons:[
-      {
-        name: 'Manu', age: 20
-      },
-      {
-        name: event.target.value , age: 18
-      },
-      {
-        name: 'Harsh', age: 26
-      }
-    ]})
-}
+      persons: [
+        {
+          name: 'Manu', age: 20
+        },
+        {
+          name: event.target.value, age: 18
+        },
+        {
+          name: 'Harsh', age: 26
+        }
+      ]
+    })
+  }
+
+  togglePersonHandler = () => {
+      this.setState({showPersons:!(this.state.showPersons)});
+  }
 
   render() {
     //Inline Styles
-    const style ={
+    const style = {
       backgroundColor: 'white',
-      font:'inherit',
+      font: 'inherit',
       border: '1px solid blue',
-      padding:'8px',
+      padding: '8px',
       cursor: 'pointer'
     }
     return (
@@ -66,12 +73,15 @@ class App extends Component {
         <h1>Hello World</h1>
         {/*Second method is inefficient should avoid usind it*/}
         {/* <button onClick={this.switchNameHandler.bind(this,'harry')}>Switch Names</button> */}
-        <button style={style} onClick={(()=>this.switchNameHandler('harry!!!!'))}>Switch Names</button> 
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age}/>
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}
-         switchNameHandler={this.switchNameHandler.bind(this,'Megan')}
-         nameChangeHandler={this.nameChangeHandler}>My Hobbies:Racing</Person>
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+        {/* <button style={style} onClick={(() => this.switchNameHandler('harry!!!!'))}>Switch Names</button> */}
+        <button onClick={this.togglePersonHandler}>Switch Names</button>
+        {this.state.showPersons?<div>
+          <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+          <Person name={this.state.persons[1].name} age={this.state.persons[1].age}
+            switchNameHandler={this.switchNameHandler.bind(this, 'Megan')}
+            nameChangeHandler={this.nameChangeHandler}>My Hobbies:Racing</Person>
+          <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+        </div> : null}
       </div>
 
     );
