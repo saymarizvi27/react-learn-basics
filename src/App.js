@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import './App.css';
+import person from './Person/Person.js';
 import Person from './Person/Person.js';
 
 //Class Based 
@@ -16,7 +17,7 @@ class App extends Component {
         name: 'Harsh', age: 26
       }
     ],
-    showPersons: false 
+    showPersons: false
   }
 
   //Do not use this,switchNameHandler() 
@@ -56,7 +57,7 @@ class App extends Component {
   }
 
   togglePersonHandler = () => {
-      this.setState({showPersons:!(this.state.showPersons)});
+    this.setState({ showPersons: !(this.state.showPersons) });
   }
 
   render() {
@@ -68,6 +69,22 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     }
+
+    let person = null;
+    //Better way and cleaner way 
+    if (this.state.showPersons) {
+      person =
+        (
+          <div>
+            <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
+            <Person name={this.state.persons[1].name} age={this.state.persons[1].age}
+              switchNameHandler={this.switchNameHandler.bind(this, 'Megan')}
+              nameChangeHandler={this.nameChangeHandler}>My Hobbies:Racing</Person>
+            <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+          </div>
+        );
+    }
+
     return (
       <div className="App">
         <h1>Hello World</h1>
@@ -75,13 +92,7 @@ class App extends Component {
         {/* <button onClick={this.switchNameHandler.bind(this,'harry')}>Switch Names</button> */}
         {/* <button style={style} onClick={(() => this.switchNameHandler('harry!!!!'))}>Switch Names</button> */}
         <button onClick={this.togglePersonHandler}>Switch Names</button>
-        {this.state.showPersons?<div>
-          <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-          <Person name={this.state.persons[1].name} age={this.state.persons[1].age}
-            switchNameHandler={this.switchNameHandler.bind(this, 'Megan')}
-            nameChangeHandler={this.nameChangeHandler}>My Hobbies:Racing</Person>
-          <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
-        </div> : null}
+        {person}
       </div>
 
     );
