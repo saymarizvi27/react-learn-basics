@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import './App.css';
-import person from './Person/Person.js';
 import Person from './Person/Person.js';
+import Radium from 'radium';
 
 //Class Based 
 class App extends Component {
@@ -39,19 +39,19 @@ class App extends Component {
     })
   }
 
-  nameChangeHandler = (event ,id) => {
-    const personIndex = this.state.persons.findIndex(p =>{
+  nameChangeHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
       return p.id === id;
     })
 
     const person = {
       ...this.state.persons[personIndex]
     }
-    person.name =event.target.value;
+    person.name = event.target.value;
     const persons = [...this.state.persons];
-    persons[personIndex] =person;
-    
-    this.setState({persons:persons})
+    persons[personIndex] = person;
+
+    this.setState({ persons: persons })
   }
 
   deletePersonHandler = (personIndex) => {
@@ -71,22 +71,26 @@ class App extends Component {
     //Inline Styles
     let style = {
       backgroundColor: 'green',
-      color:'white',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover':{
+        backgroundColor : 'lightgreen',
+        color: 'black' 
+      }
     }
-    const classes= [];
-    
-    if (this.state.persons.length <=2) {
-      classes.push('red'); 
+    const classes = [];
+
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
     }
-    if (this.state.persons.length <=1) {
+    if (this.state.persons.length <= 1) {
       classes.push('bold');
     }
-    
-    
+
+
     let person = null;
     //Better way and cleaner way and preferred way
     //Using map and make a cleaner code
@@ -96,6 +100,10 @@ class App extends Component {
     // https://adhithiravi.medium.com/why-do-i-need-keys-in-react-lists-dbb522188bbb#:~:text=Keys%20help%20React%20identify%20which,array%2C%20a%20key%20is%20required.&text=Each%20item%20in%20the%20array,a%20key%20for%20each%20item.
     if (this.state.showPersons) {
       style.backgroundColor = 'red'
+      style[':hover'] ={
+        backgroundColor : 'salmon',
+        color: 'black' 
+      }
       person =
         (
           <div>
@@ -103,9 +111,9 @@ class App extends Component {
               return (<Person name={person.name}
                 age={person.age}
                 onClick={() => { this.deletePersonHandler(index) }}
-                key={person.id} 
-                changed={(event)=>{this.nameChangeHandler(event,person.id)}
-                }/>)
+                key={person.id}
+                changed={(event) => { this.nameChangeHandler(event, person.id) }
+                } />)
             })}
             {/* <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
             <Person name={this.state.persons[1].name} age={this.state.persons[1].age}
@@ -131,7 +139,7 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
 
 
 //This is stateful component
