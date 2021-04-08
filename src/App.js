@@ -69,8 +69,9 @@ class App extends Component {
 
   render() {
     //Inline Styles
-    const style = {
-      backgroundColor: 'white',
+    let style = {
+      backgroundColor: 'green',
+      color:'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -85,6 +86,7 @@ class App extends Component {
     // read this article for interview purpose 
     // https://adhithiravi.medium.com/why-do-i-need-keys-in-react-lists-dbb522188bbb#:~:text=Keys%20help%20React%20identify%20which,array%2C%20a%20key%20is%20required.&text=Each%20item%20in%20the%20array,a%20key%20for%20each%20item.
     if (this.state.showPersons) {
+      style.backgroundColor = 'red'
       person =
         (
           <div>
