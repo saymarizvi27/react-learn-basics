@@ -8,13 +8,13 @@ class App extends Component {
   state = {
     persons: [
       {
-        name: 'Max', age: 20
+        name: 'Max', age: 20 , id: 1 
       },
       {
-        name: 'Sayma', age: 18
+        name: 'Sayma', age: 18 ,id: 2
       },
       {
-        name: 'Harsh', age: 26
+        name: 'Harsh', age: 26 ,id: 3
       }
     ],
     showPersons: false
@@ -59,8 +59,8 @@ class App extends Component {
   deletePersonHandler = (personIndex) => {
     // const person = this.state.persons;
     //Better practice as it creates a copy it is better approach
-     
-    const persons =[...this.state.persons]
+
+    const person =[...this.state.persons]
     person.splice(personIndex, 1);
     this.setState({ persons: person })
   }
@@ -89,7 +89,8 @@ class App extends Component {
             {this.state.persons.map((person, index) => {
               return (<Person name={person.name}
                 age={person.age}
-                onClick={() => { this.deletePersonHandler(index) }} />)
+                onClick={() => { this.deletePersonHandler(index)}}
+                key ={person.id} />)
             })}
             {/* <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
             <Person name={this.state.persons[1].name} age={this.state.persons[1].age}
