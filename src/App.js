@@ -77,7 +77,16 @@ class App extends Component {
       padding: '8px',
       cursor: 'pointer'
     }
-
+    const classes= [];
+    
+    if (this.state.persons.length <=2) {
+      classes.push('red'); 
+    }
+    if (this.state.persons.length <=1) {
+      classes.push('bold');
+    }
+    
+    
     let person = null;
     //Better way and cleaner way and preferred way
     //Using map and make a cleaner code
@@ -110,6 +119,7 @@ class App extends Component {
     return (
       <div className="App">
         <h1>Hello World</h1>
+        <p className={classes.join(' ')}>This is really working</p>
         {/*Second method is inefficient should avoid usind it*/}
         {/* <button onClick={this.switchNameHandler.bind(this,'harry')}>Switch Names</button> */}
         {/* <button style={style} onClick={(() => this.switchNameHandler('harry!!!!'))}>Switch Names</button> */}
