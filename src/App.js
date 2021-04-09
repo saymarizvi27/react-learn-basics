@@ -1,7 +1,7 @@
 import React, { Component, useState } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
-import Radium from 'radium';
+import Radium ,{StyleRoot} from 'radium';
 
 //Class Based 
 class App extends Component {
@@ -125,6 +125,7 @@ class App extends Component {
     }
 
     return (
+      <StyleRoot>
       <div className="App">
         <h1>Hello World</h1>
         <p className={classes.join(' ')}>This is really working</p>
@@ -134,6 +135,7 @@ class App extends Component {
         <button style={style} onClick={this.togglePersonHandler}>Switch Names</button>
         {person}
       </div>
+      </StyleRoot>
 
     );
   }
