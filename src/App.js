@@ -1,9 +1,25 @@
 import React, { Component, useState } from 'react';
 import './App.css';
 import Person from './Person/Person.js';
-import Radium ,{StyleRoot} from 'radium';
+// import Radium ,{StyleRoot} from 'radium';
+import styled from 'styled-components';
 
 //Class Based 
+
+const StyledButton =styled.button`
+background-color: ${props => props.alt? 'red':'green'};
+color: white;
+font: inherit;
+border: 1px solid blue;
+padding: 8px;
+cursor: pointer;
+
+&:hover{
+  background-color :  ${props => props.alt? 'salmon':'lightgreen'};
+  color: black 
+}
+`
+
 class App extends Component {
   state = {
     persons: [
@@ -125,24 +141,25 @@ class App extends Component {
     }
 
     return (
-      <StyleRoot>
+      // <StyleRoot>
       <div className="App">
         <h1>Hello World</h1>
         <p className={classes.join(' ')}>This is really working</p>
         {/*Second method is inefficient should avoid usind it*/}
         {/* <button onClick={this.switchNameHandler.bind(this,'harry')}>Switch Names</button> */}
         {/* <button style={style} onClick={(() => this.switchNameHandler('harry!!!!'))}>Switch Names</button> */}
-        <button style={style} onClick={this.togglePersonHandler}>Switch Names</button>
+        {/* <button style={style} onClick={this.togglePersonHandler}>Switch Names</button> */}
+        <StyledButton onClick={this.togglePersonHandler} alt={this.state.showPersons}>Switch Names</StyledButton>
         {person}
       </div>
-      </StyleRoot>
+      // </StyleRoot>
 
     );
   }
 }
 
-export default Radium(App);
-
+// export default Radium(App);
+export default App;
 
 //This is stateful component
 //Function Based
