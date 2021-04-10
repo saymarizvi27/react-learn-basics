@@ -1,5 +1,7 @@
 import React from 'react';
 import classes from './Person.css';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
+//If using later version of rectjs use Person.module.css
 // import Radium from 'radium';
 // import styled from 'styled-components';
 
@@ -22,6 +24,10 @@ import classes from './Person.css';
 
 
 const person = (props) => {
+    const rand =Math.random();
+    if (rand > 0.7){
+        throw new Error( 'Something went wrong')
+    }
     // const style = {
     //     '@media (min-width:500px)': {
     //         width: '450px'
@@ -30,6 +36,7 @@ const person = (props) => {
     return (
         //   <div className ="Person" style ={style}>
         // <StyledDiv>
+        <ErrorBoundary key={person.id}>
         <div className={classes.Person}> 
             <p onClick={props.onClick}>I am a {props.name} and I am {props.age} years old!</p>
             {/*This is children*/}
@@ -37,6 +44,7 @@ const person = (props) => {
             {/*Two way binding*/}
             <input type="text" onChange={props.changed} value={props.name} />
             </div>
+            </ErrorBoundary>
         // </StyledDiv>
           //</div>
           )

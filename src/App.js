@@ -116,7 +116,7 @@ class App extends Component {
   
     let person = null;
     //Better way and cleaner way and preferred way
-    //Using map and make a cleaner code
+    //Using map to  make the code cleaner 
     //Keys help React identify which items have changed (added/removed/re-ordered). To give a unique identity to every element inside the array, a key is required.
 
     // read this article for interview purpose 
