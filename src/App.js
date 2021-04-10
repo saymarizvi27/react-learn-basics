@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person.js';
 // import Radium ,{StyleRoot} from 'radium';
 import styled from 'styled-components';
@@ -97,16 +97,23 @@ class App extends Component {
         color: 'black' 
       }
     }
-    const classes = [];
+
+    let btnClass =[classes.Button];
+
+
+    // const classes = [];
+    const assignedClasses = [];
 
     if (this.state.persons.length <= 2) {
-      classes.push('red');
+      // classes.push('red');
+      assignedClasses.push(classes.red);
     }
     if (this.state.persons.length <= 1) {
-      classes.push('bold');
+      // classes.push('bold');
+      assignedClasses.push(classes.bold);
     }
 
-
+  
     let person = null;
     //Better way and cleaner way and preferred way
     //Using map and make a cleaner code
@@ -115,11 +122,14 @@ class App extends Component {
     // read this article for interview purpose 
     // https://adhithiravi.medium.com/why-do-i-need-keys-in-react-lists-dbb522188bbb#:~:text=Keys%20help%20React%20identify%20which,array%2C%20a%20key%20is%20required.&text=Each%20item%20in%20the%20array,a%20key%20for%20each%20item.
     if (this.state.showPersons) {
-      style.backgroundColor = 'red'
-      style[':hover'] ={
-        backgroundColor : 'salmon',
-        color: 'black' 
-      }
+      btnClass.push(classes.Red)
+      // style.backgroundColor = 'red'
+      // style[':hover'] ={
+      //   backgroundColor : 'salmon',
+      //   color: 'black' 
+      // }
+
+
       person =
         (
           <div>
@@ -142,14 +152,15 @@ class App extends Component {
 
     return (
       // <StyleRoot>
-      <div className="App">
+        <div className={classes.App}>
         <h1>Hello World</h1>
-        <p className={classes.join(' ')}>This is really working</p>
+        {/* <p className={classes.join(' ')}>This is really working</p> */}
+        <p className={assignedClasses.join(' ')}>This is really working</p>
         {/*Second method is inefficient should avoid usind it*/}
         {/* <button onClick={this.switchNameHandler.bind(this,'harry')}>Switch Names</button> */}
         {/* <button style={style} onClick={(() => this.switchNameHandler('harry!!!!'))}>Switch Names</button> */}
-        {/* <button style={style} onClick={this.togglePersonHandler}>Switch Names</button> */}
-        <StyledButton onClick={this.togglePersonHandler} alt={this.state.showPersons}>Switch Names</StyledButton>
+        <button className={btnClass.join(' ')} onClick={this.togglePersonHandler}>Switch Names</button>
+        {/* <StyledButton onClick={this.togglePersonHandler} alt={this.state.showPersons}>Switch Names</StyledButton> */}
         {person}
       </div>
       // </StyleRoot>
